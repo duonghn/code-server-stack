@@ -11,10 +11,13 @@ services:
       - HASHED_PASSWORD= #optional
       - SUDO_PASSWORD=password #optional
       - SUDO_PASSWORD_HASH= #optional
-      - PROXY_DOMAIN=code-server.my.domain #optional
+      - PROXY_DOMAIN=live.code-server.revvitycloud.net #optional
       - DEFAULT_WORKSPACE=/config/workspace #optional
     volumes:
-      - /path/to/code-server/config:/config
+      - code-server_config:/config
     ports:
       - 8443:8443
     restart: unless-stopped
+
+volumes:
+  code-server_config:
