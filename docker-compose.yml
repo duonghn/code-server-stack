@@ -22,6 +22,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    env_file:
+      - default.env
     restart: unless-stopped
   certbot:
     image: certbot/certbot
@@ -30,6 +32,8 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./nginx/etc:/etc/nginx/conf.d
+    env_file:
+      - default.env
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
