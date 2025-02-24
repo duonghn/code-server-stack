@@ -31,8 +31,8 @@ case $1 in
             exit 0
         fi
         docker compose down
-        docker system prune -f
-        docker volume rm code-server-stack_code-server_config
+        #docker system prune -f
+        #docker volume rm code-server-stack_code-server_config
         echo "Session stopped and cleaned"
         ;;
     *)
