@@ -7,7 +7,12 @@ generate_password() {
 case $1 in
     "start")
         NEW_PASSWORD=$(generate_password)
-        sed -i '' "s/CODE_SERVER_PASSWORD=.*/CODE_SERVER_PASSWORD=$NEW_PASSWORD/" .env
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            sed -i '' "s/CODE_SERVER_PASSWORD=.*/CODE_SERVER_PASSWORD=$NEW_PASSWORD/" .env
+        else
+            sed -i "s/CODE_SERVER_PASSWORD=.*/CODE_SERVER_PASSWORD=$NEW_PASSWORD/" .env
+        fi
+        
         docker compose up -d
         echo "Session started with password: $NEW_PASSWORD"
         ;;
